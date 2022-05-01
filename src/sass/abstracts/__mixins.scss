@@ -1,0 +1,15 @@
+@mixin respond-to($breakpoint) {
+  @if map-has-key($map: $breakpoints, $key: $breakpoint) {
+    @media #{inspect(map-get($map: $breakpoints, $key:$breakpoint ))} {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` doesn't exist";
+  }
+}
+@mixin flex($justify, $align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+
+}

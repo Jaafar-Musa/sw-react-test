@@ -1,0 +1,10 @@
+.CurencyBtn{
+    padding: 15px 18px;
+    // display: flex;
+    min-width: 100px;
+    @include flex(center,center);
+    &:hover{
+        background-color: rgba(238, 238, 238, 1);
+        cursor: pointer;
+    }
+}

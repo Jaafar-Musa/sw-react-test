@@ -1,0 +1,29 @@
+nav {
+  height: $height-Navbar;
+  width: 100%;
+  padding: 0 60px;
+  // position: fixed;
+  @include flex($justify: space-between, $align: center);
+  > .items {
+    height: 100%;
+    display: flex;
+  }
+  & .Links {
+    @extend .items;
+    a {
+      @include flex($justify: center, $align: center);
+      padding: 0 20px;
+      font-weight: 600;
+      text-decoration: none;
+      color: $color-black;
+    }
+    &__Active {
+      border-bottom: 2px solid $color-primary;
+    }
+  }
+  li {
+    @include flex($justify: center, $align: center);
+    height: 100%;
+    padding: 0 20px;
+  }
+}

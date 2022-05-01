@@ -1,0 +1,18 @@
+.UpDownArrow {
+  transition: all linear 0.5s;
+  display: flex;
+  position: relative;
+  &__Left,
+  &__Right {
+    width: 6px;
+    height: 1px;
+    position: absolute;
+    background-color: #000;
+  }
+  &__Left {
+    transform: rotateZ(40deg) ;
+  }
+  &__Right {
+    transform: translate(2px, 2px) rotateZ(-40deg) translateX(3px);
+  }
+}

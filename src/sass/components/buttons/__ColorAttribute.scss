@@ -1,0 +1,36 @@
+$cube: 20px;
+.ColorAttribute {
+  width: fit-content;
+  form {
+    display: flex;
+  }
+  &__Selection {
+    width: $cube;
+    height: $cube;
+    margin: 4px;
+    opacity: 0.6;
+    position: relative;
+    input[type="radio"] {
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      position: absolute;
+      display: inline-block;
+      @include flex(center,center);
+      &:checked {
+        opacity: 1;
+        visibility: hidden;
+        &::before {
+            visibility: visible;
+          content: "";
+          width: calc(100% + 2px);
+          height: calc(100% + 2px);
+          border: 2px solid $color-primary !important;
+          position: absolute;
+        //   background-color: rgb(115, 0, 255);
+        }
+      }
+    }
+  }
+}

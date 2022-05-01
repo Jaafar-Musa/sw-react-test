@@ -1,0 +1,316 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+nav {
+  height: 60px;
+  width: 100%;
+  padding: 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav > .items, nav > .Links {
+  height: 100%;
+  display: flex;
+}
+nav .Links a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #1d1f22;
+}
+nav .Links__Active {
+  border-bottom: 2px solid #5ece7b;
+}
+nav li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.Dropdown {
+  top: 60px;
+  left: auto;
+  right: 0;
+  position: absolute;
+}
+
+.DropdownBtn {
+  position: relative;
+  min-width: 60px;
+}
+.DropdownBtn button {
+  height: 100%;
+  width: 100%;
+  padding: 0 18px;
+  color: #1d1f22;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+.DropdownBtn button > svg path {
+  fill: #1d1f22;
+}
+
+.ProductCard {
+  width: 320px;
+  height: 368px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: transparent;
+}
+.ProductCard:hover {
+  box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.447);
+}
+.ProductCard__Image {
+  width: 100%;
+  height: 295px;
+  border: 2px solid red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ProductCard__Image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.ProductCard__Desc {
+  background-color: green;
+  border: 2px solid blue;
+  height: 73px;
+  display: flex;
+  justify-content: center;
+  align-items: unset;
+  flex-direction: column;
+}
+.ProductCard__Desc span {
+  margin-bottom: 2px;
+  font-weight: lighter;
+}
+.ProductCard__Desc p {
+  margin-top: 2px;
+  font-weight: bold;
+}
+
+.CartItems {
+  display: flex;
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e5e5;
+  min-height: 250px;
+}
+.CartItems:nth-child(1) {
+  border-top: 1px solid #e5e5e5;
+}
+.CartItems__Info {
+  display: flex;
+  flex: 0.8;
+}
+.CartItems__InfoOptions {
+  flex: 0.9;
+}
+.CartItems__InfoOptions h3 {
+  font-size: 25px;
+  font-weight: bold;
+}
+.CartItems__InfoOptions h4 {
+  font-weight: lighter;
+  font-size: 18px;
+  margin: 5px 0;
+}
+.CartItems__InfoOptions p {
+  margin: 10px 0;
+  font-weight: bold;
+}
+.CartItems__InfoAmount {
+  height: 100%;
+  flex: 0.1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.CartItems__Imgs {
+  flex: 0.2;
+  background-color: #dfdede;
+}
+
+.CurrencyDropDown {
+  box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.447);
+}
+
+.CartDropDown {
+  min-width: 500px;
+}
+
+.CartItemsToggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  padding: 4px 15px;
+  font-size: 35px;
+  font-weight: lighter;
+}
+.CartItemsToggle:hover {
+  background-color: #1d1f22;
+  color: white;
+  cursor: pointer;
+}
+
+.SizeAttribute {
+  width: fit-content;
+}
+.SizeAttribute form {
+  display: flex;
+}
+.SizeAttribute__Selection {
+  margin: 2px 4px;
+  min-width: 55px;
+  position: relative;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SizeAttribute__Selection input[type=radio] {
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.SizeAttribute__Selection input[type=radio]:checked {
+  opacity: 1;
+}
+.SizeAttribute__Selection input[type=radio]:checked::before {
+  content: attr(data-size);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1d1f22;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+.SizeAttribute__Selection::before {
+  content: "";
+  border: 1px solid #1d1f22;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ColorAttribute {
+  width: fit-content;
+}
+.ColorAttribute form {
+  display: flex;
+}
+.ColorAttribute__Selection {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  opacity: 0.6;
+  position: relative;
+}
+.ColorAttribute__Selection input[type=radio] {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ColorAttribute__Selection input[type=radio]:checked {
+  opacity: 1;
+  visibility: hidden;
+}
+.ColorAttribute__Selection input[type=radio]:checked::before {
+  visibility: visible;
+  content: "";
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 2px solid #5ece7b !important;
+  position: absolute;
+}
+
+.CurencyBtn {
+  padding: 15px 18px;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.CurencyBtn:hover {
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+.UpDownArrow {
+  transition: all linear 0.5s;
+  display: flex;
+  position: relative;
+}
+.UpDownArrow__Left, .UpDownArrow__Right {
+  width: 6px;
+  height: 1px;
+  position: absolute;
+  background-color: #000;
+}
+.UpDownArrow__Left {
+  transform: rotateZ(40deg);
+}
+.UpDownArrow__Right {
+  transform: translate(2px, 2px) rotateZ(-40deg) translateX(3px);
+}
+
+.ProductListing__Title {
+  padding: 60px;
+  height: 30vh;
+  font-size: 35px;
+  display: flex;
+  justify-content: unset;
+  align-items: center;
+}
+.ProductListing__Title h4 {
+  font-weight: 400;
+}
+.ProductListing__Cards {
+  padding-bottom: 30px;
+  justify-items: center;
+  display: grid;
+  gap: 35px 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/*# sourceMappingURL=main.css.map */

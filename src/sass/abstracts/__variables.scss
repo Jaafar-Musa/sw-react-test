@@ -1,0 +1,26 @@
+//zIndex
+
+//height
+$height-Navbar: 60px;
+
+//transitions
+
+//bp
+$breakpoints: (
+  "sm": (
+    max-width: 768px,
+  ),
+  "md": (
+    min-width: 768px,
+  ),
+  "lg": (
+    min-width: 1200px,
+  ),
+);
+
+//color
+$color-primary: #5ece7b;
+$color-black: rgba(29, 31, 34, 1);
+
+//shadow
+$shadow: rgba(168, 172, 176, 0.447);

@@ -1,0 +1,40 @@
+.CartItems{
+    display: flex;
+    width: 100%;
+    padding: 20px 0 ;
+    &:nth-child(1){
+        border-top: 1px solid rgba(229, 229, 229, 1);
+    }
+    border-bottom: 1px solid rgba(229, 229, 229, 1);
+    min-height: 250px;
+    &__Info{
+        display: flex;
+        flex: 0.8;
+        &Options{
+            flex: 0.9;
+            h3{
+                font-size: 25px;
+                font-weight: bold;
+            }
+            h4{
+                font-weight: lighter;
+                font-size: 18px;
+                margin: 5px 0;
+            }
+            p{
+                margin: 10px 0;
+                font-weight: bold;
+            }
+        }
+        &Amount{
+            height: 100%;
+            flex: 0.1;
+            @include flex(space-between, center);
+            flex-direction: column;
+        }
+    }
+    &__Imgs{
+        flex: 0.2;
+        background-color: rgb(223, 222, 222);
+    }
+}

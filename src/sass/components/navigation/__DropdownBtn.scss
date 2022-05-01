@@ -1,0 +1,17 @@
+.DropdownBtn {
+  //todo: make sure it responses to dynamic data
+  position: relative;
+  min-width: 60px;
+  button {
+    height: 100%;
+    width: 100%;
+    padding: 0 18px;
+    color: $color-black;
+    font-size: 20px;
+    @include flex($justify: space-around, $align: center);
+    cursor: pointer;
+    > svg path {
+      fill: $color-black;
+    }
+  }
+}
