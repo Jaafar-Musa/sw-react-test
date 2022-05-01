@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import CurencyBtn from "../buttons/CurencyBtn";
+import PropTypes from "prop-types"
 
-export default class CurrencyDropDown extends Component {
+
+
+class CurrencyDropDown extends Component {
   render() {
     const currencies = this.props.currencies;
     return (
@@ -14,3 +17,8 @@ export default class CurrencyDropDown extends Component {
     );
   }
 }
+CurrencyDropDown.propTypes = {
+   currencies: PropTypes.array.isRequired
+}
+
+export default CurrencyDropDown

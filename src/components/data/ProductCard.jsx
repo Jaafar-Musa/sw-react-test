@@ -6,7 +6,6 @@ class ProductCard extends Component {
     super(props)
   }
   render() {
-    console.log(this.props, "propss")
     return (
       <div className='ProductCard'>
           <div className="ProductCard__Image">

@@ -12,23 +12,28 @@ import Loading from "../data/Loading";
 class Navbar extends Component {
   render() {
     const { currencies, networkStatus, categories } = this.props.data;
-    // const
-    if (networkStatus !== 7) return <Loading />;
+
     return (
       <nav>
         <ul className="Links">
-          {categories.map((val, i) => {
-            let { name } = val;
-            return name === "all" ? (
-              <NavLink to={`/categories/explore`} text={"Explore"} key={i}/>
-            ) : (
-              
-              <NavLink to={`/categories/${name}`} text={name.charAt(0).toUpperCase() + name.slice(1)} key={i}/>
-            );
-          })}
+          {networkStatus === 7 ? (
+            categories.map((val, i) => {
+              let { name } = val;
+              return name === "all" ? (
+                <NavLink to={`/categories/explore`} text={"Explore"} key={i} />
+              ) : (
+                <NavLink
+                  to={`/categories/${name}`}
+                  text={name.charAt(0).toUpperCase() + name.slice(1)}
+                  key={i}
+                />
+              );
+            })
+          ) : (
+            <NavLink to={`/categories/explore`} text={"Explore"} />
+          )}
         </ul>
         <span>
-          {/* <img src={Logo} /> */}
           <Logo />
         </span>
 
@@ -36,7 +41,15 @@ class Navbar extends Component {
           <DropdownBtn
             value={"$"}
             dropdown
-            dropdownContent={<CurrencyDropDown currencies={currencies} />}
+            dropdownContent={
+              <CurrencyDropDown
+                currencies={
+                  currencies === undefined
+                    ? [{ symbol: "$", label: "usd" }]
+                    : currencies
+                }
+              />
+            }
           />
           <DropdownBtn
             value={<EmptyCart />}

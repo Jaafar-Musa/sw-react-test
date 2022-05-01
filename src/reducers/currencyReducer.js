@@ -1,6 +1,9 @@
 import { ActionTypes } from "../actions";
 
-const initialState = "USD";
+const initialState = {
+  symbol:"$",
+  label:"USD"
+};
 
 const currencyReducer = (state =initialState, action) => {
   switch (action.type) {
