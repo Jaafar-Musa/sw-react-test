@@ -13,11 +13,9 @@ export default class CartItems extends Component {
             <h4>Shirtttt</h4>
             <p>$50.00</p>
             <div className="Sizes">
-              <p>Sizes:</p>
-                <SizeAttribute />
+                {/* <SizeAttribute /> */}
             </div>
             <div className="Colors">
-              <p>Colors:</p>
               <ColorAttribute/>
             </div>
           </div>

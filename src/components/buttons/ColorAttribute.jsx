@@ -1,24 +1,34 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-export default class ColorAttribute extends Component {
+class ColorAttribute extends Component {
   render() {
+    const { attributes, name,onChange } = this.props;
     return (
       <div className="ColorAttribute">
-        <form>
-          <div
-            className="ColorAttribute__Selection"
-            style={{ backgroundColor: "black" }}
-          >
-            <input type="radio" name="test" />
-          </div>
-          <div
-            className="ColorAttribute__Selection"
-            style={{ backgroundColor: "blue" }}
-          >
-            <input type="radio" name="test" />
-          </div>
+        <h4>{name && name + ":"} </h4>
+        <form onChange={(e)=>{onChange(e)}}>
+          {attributes &&
+            attributes.map((v, i) => {
+              return (
+                <div
+                  className="ColorAttribute__Selection"
+                  style={{ backgroundColor: v.value }}
+                  key={i}
+                >
+                  <input type="radio" name={name} value={v.value} />
+                </div>
+              );
+            })}
         </form>
       </div>
     );
   }
 }
+ColorAttribute.propTypes = {
+  attributes: PropTypes.array,
+  name: PropTypes.string,
+  onChange:PropTypes.func
+};
+
+export default ColorAttribute;

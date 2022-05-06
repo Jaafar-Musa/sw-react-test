@@ -16,12 +16,7 @@ query ($input:CategoryInput){
             inStock,
             name,
             attributes{
-                items{
-                    displayValue,
-                    value
-                },
                 name,
-                type,
             }
             id,
         }

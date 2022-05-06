@@ -7,12 +7,11 @@ import CurrencyDropDown from "../data/CurrencyDropDown";
 import CartDropDown from "../data/CartDropDown";
 import { graphql } from "@apollo/client/react/hoc";
 import { NAV_DATA } from "../../graphql/navQuery";
-import Loading from "../data/Loading";
+import { connect } from "react-redux";
 
 class Navbar extends Component {
   render() {
     const { currencies, networkStatus, categories } = this.props.data;
-
     return (
       <nav>
         <ul className="Links">
@@ -45,7 +44,7 @@ class Navbar extends Component {
               <CurrencyDropDown
                 currencies={
                   currencies === undefined
-                    ? [{ symbol: "$", label: "usd" }]
+                    ? [this.props.currency]
                     : currencies
                 }
               />
@@ -54,11 +53,19 @@ class Navbar extends Component {
           <DropdownBtn
             value={<EmptyCart />}
             dropdownContent={<CartDropDown />}
+            backdrop
           />
         </ul>
       </nav>
     );
   }
+
+}
+const mapStateToProps = (state)=>{
+  return {
+    currency:state.currency
+  }
+
 }
 
-export default graphql(NAV_DATA)(Navbar);
+export default connect(mapStateToProps)(graphql(NAV_DATA)(Navbar));

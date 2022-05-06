@@ -1,17 +1,25 @@
 import React, { Component } from "react";
-import CartItems from "../components/data/CartItems";
 import Loading from "../components/data/Loading";
 import ProductCard from "../components/data/ProductCard";
 import withParam from "../utils/useParams";
-import { graphql } from "@apollo/client/react/hoc";
 import { GET_CATEGORIES } from "../graphql/categoriesQuery";
 import { Query } from "@apollo/client/react/components";
-import client from "../graphql";
-// import {} from "react-router-dom"
+import { connect } from "react-redux";
 
 class ProductListing extends Component {
+  //todo pass product id instead
+  handleCardClick(product) {
+    this.props.navigate(`/categories/${this.props.match.param.id}/${product.id}`);
+  }
+  handleCartClick(product){
+    if(product.attributes.length < 1){
+
+    }
+    this.handleCardClick(product)
+  }
   render() {
     let name = this.props.match.param.id;
+    let { label, symbol } = this.props.currency;
     const title = name.charAt(0).toUpperCase() + name.slice(1);
     return (
       <section className="ProductListing">
@@ -30,11 +38,17 @@ class ProductListing extends Component {
               return (
                 <div className="ProductListing__Cards">
                   {data.category.products.map((v, i) => {
+                    let [price] = v.prices.filter(
+                      (v) => v.currency.label === label
+                    );
                     return (
                       <ProductCard
                         imgUrl={v.gallery[0]}
                         brand={v.brand}
                         key={i}
+                        price={symbol.concat(" ", price.amount)}
+                        inStock={v.inStock}
+                        handleCardClick={()=>this.handleCardClick(v)}
                       />
                     );
                   })}
@@ -47,5 +61,13 @@ class ProductListing extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currency,
+  };
+};
 
-export default withParam(ProductListing);
+
+export default connect(
+  mapStateToProps,
+)(withParam(ProductListing));

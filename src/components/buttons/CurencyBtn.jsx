@@ -1,9 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-export default class CurencyBtn extends Component {
+class CurencyBtn extends Component {
   render() {
+    const { active, currency, handleClick } = this.props;
     return (
-      <div className='CurencyBtn'>{this.props.currency}</div>
-    )
+      <div
+        className={`${active ? "Active" : null} CurencyBtn`}
+        onClick={() => {
+          return handleClick();
+        }}
+      >
+        {currency}
+      </div>
+    );
   }
 }
+
+CurencyBtn.propTypes = {
+  currency: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  handleClick: PropTypes.func,
+};
+
+export default CurencyBtn;

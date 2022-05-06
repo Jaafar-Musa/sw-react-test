@@ -1,0 +1,100 @@
+.ProductDescription {
+  //todo: clean up
+  padding: 55px 10px;
+  display: flex;
+  min-height: calc(100vh - $height-Navbar);
+  &__Gallery {
+    flex: 0.67;
+    display: flex;
+    height: 100%;
+    padding: 0 12px;
+    &__Side {
+      height: 600px;
+      flex: 0.2;
+      @include flex(unset, center);
+      flex-direction: column;
+      overflow-y: auto;
+      img {
+        &:hover {
+          cursor: pointer;
+        }
+        width: 100%;
+        aspect-ratio: 1/1;
+        // height: 120px;
+        display: block;
+        margin: 12px 0;
+      }
+    }
+    &__Main {
+      padding-left: 20%;
+      height: 500px;
+      flex: 0.8;
+      // width: 80%;
+      padding: 10px 50px;
+      // border: 1px solid;
+      img {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  &__Info {
+    > .titles {
+      flex: 0.2;
+      @include flex(center, unset);
+      flex-direction: column;
+      h3 {
+        font-size: 30px;
+      }
+
+      span {
+        font-size: 30px;
+        font-weight: lighter;
+      }
+    }
+    > .attributes {
+      flex: 0.3;
+      @include flex(center, unset);
+      flex-direction: column;
+    }
+    > .price {
+      flex: 0.1;
+      padding: 12px 0;
+      @include flex(space-around, unset);
+      flex-direction: column;
+    }
+    > .button {
+      @include flex(unset, center);
+      padding: 12px 0;
+      flex: 0.1;
+      button {
+        background-color: $color-primary;
+        width: 280px;
+        padding: 15px 50px;
+        color: rgb(255, 255, 255);
+        &:hover {
+          cursor: pointer;
+          background-color: $color-primary-dk;
+        }
+        &:disabled{
+            background-color: rgb(196, 194, 194);
+            cursor: not-allowed;
+            &:hover{
+                background-color: rgb(196, 194, 194);
+            }
+            
+        }
+      }
+    }
+    > .description {
+      flex: 0.3;
+      padding-top: 30px;
+      // @include flex(unset,center);
+    }
+    padding: 5px 12px;
+    flex: 0.43;
+    @include flex(center, unset);
+    flex-direction: column;
+  }
+}

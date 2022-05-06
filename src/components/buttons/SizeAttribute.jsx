@@ -1,25 +1,38 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 // todo: n r n l nn Margin error
-export default class SizeAttribute extends Component {
+class SizeAttribute extends Component {
   render() {
+    const { attributes, name,onChange } = this.props;
     return (
       <div className="SizeAttribute">
-
-        <form onChange={()=>console.log("test")}>
-          <div className="SizeAttribute__Selection">
-            <input type="radio" className="test" name="te" data-size="S"/>
-            <span>S</span>
-          </div>
-
-          <div className="SizeAttribute__Selection">
-            <input type="radio" className="test" name="te" data-size="X"/>
-            X
-          </div>
-
+        <h4>{name && name + ":"} </h4>
+        <form onChange={(e) =>onChange(e)}>
+          {attributes &&
+            attributes.map((v, i) => {
+              let { displayValue, value } = v;
+              return (
+                <div className="SizeAttribute__Selection" key={i}>
+                  <input
+                    type="radio"
+                    name={name}
+                    value={value}
+                    data-size={displayValue}
+                  />
+                  <span>{displayValue}</span>
+                </div>
+              );
+            })}
         </form>
-
       </div>
     );
   }
 }
+SizeAttribute.propTypes = {
+  attributes: PropTypes.array,
+  name: PropTypes.string,
+  onChange:PropTypes.func.isRequired
+};
+
+export default SizeAttribute;

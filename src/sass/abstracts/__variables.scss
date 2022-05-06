@@ -1,9 +1,14 @@
 //zIndex
+$zIndex-Elevate:2;
+$zIndex-overElements:3;
+$zIndex-backdrop:4;
+$zIndex-overBackdrop:5;
 
 //height
 $height-Navbar: 60px;
 
 //transitions
+
 
 //bp
 $breakpoints: (
@@ -20,6 +25,7 @@ $breakpoints: (
 
 //color
 $color-primary: #5ece7b;
+$color-primary-dk: #509c64;
 $color-black: rgba(29, 31, 34, 1);
 
 //shadow

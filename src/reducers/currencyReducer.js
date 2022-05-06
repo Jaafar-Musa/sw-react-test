@@ -1,17 +1,17 @@
 import { ActionTypes } from "../actions";
 
 const initialState = {
-  symbol:"$",
-  label:"USD"
+  symbol: "$",
+  label: "USD",
 };
 
-const currencyReducer = (state =initialState, action) => {
+const currencyReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.SET_CURRENCY:
       return action.payload;
-      default:
-        return state
+    default:
+      return state;
   }
 };
 
-export default currencyReducer
+export default currencyReducer;

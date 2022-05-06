@@ -1,8 +1,11 @@
 $cube: 20px;
 .ColorAttribute {
+  margin: 10px 0;
   width: fit-content;
   form {
     display: flex;
+    margin-top: 5px;
+    flex-wrap: wrap;
   }
   &__Selection {
     width: $cube;
