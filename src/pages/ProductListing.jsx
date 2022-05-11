@@ -25,8 +25,6 @@ class ProductListing extends Component {
       this.props.navigate("/cart");
       return 1;
     }
-
-    console.log("tt123");
     this.handleCardClick(e, product, true);
   }
   render() {

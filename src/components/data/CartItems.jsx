@@ -75,6 +75,7 @@ class CartItems extends Component {
                       />
                     );
                   }
+                  return null
                 })}
             </div>
             <div className="Attributes">
@@ -93,6 +94,7 @@ class CartItems extends Component {
                         }
                       />
                     );
+                    return null
                 })}
             </div>
           </div>
@@ -107,7 +109,7 @@ class CartItems extends Component {
           </div>
         </div>
         <div className="CartItems__Imgs">
-          <img src={gallery[this.state.mainImg]} alt="" />
+          <img src={gallery[this.state.mainImg]} alt={name} />
           <div className="ImageToggle">
             <button
               name="decrease"

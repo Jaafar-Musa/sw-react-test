@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import EmptyCart from "./../svg/EmptyCart";
 
 class ProductCard extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     onHover: false,
   };
@@ -20,7 +17,7 @@ class ProductCard extends Component {
       >
         {!inStock && <div className="ProductCard__OOS">OUT OF STOCK</div>}
         <div className="ProductCard__Image">
-          <img src={imgUrl} />
+          <img src={imgUrl} alt={brand}/>
         </div>
         <div className="ProductCard__Desc">
           <div

@@ -80,6 +80,7 @@ class ProductDescription extends Component {
                           onClick={() => {
                             this.setState({ ...this.state, mainImg: i });
                           }}
+                          alt={v}
                         />
                       );
                     })}
