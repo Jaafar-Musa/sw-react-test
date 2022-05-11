@@ -5,17 +5,29 @@ import withParam from "../utils/useParams";
 import { GET_CATEGORIES } from "../graphql/categoriesQuery";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
+import { addToCart } from "../actions";
 
 class ProductListing extends Component {
   //todo pass product id instead
-  handleCardClick(product) {
-    this.props.navigate(`/categories/${this.props.match.param.id}/${product.id}`);
+  handleCardClick(e, product, bool = false) {
+    if (e.target !== e.currentTarget && !bool) return;
+    this.props.navigate(
+      `/categories/${this.props.match.param.id}/${product.id}`
+    );
   }
-  handleCartClick(product){
-    if(product.attributes.length < 1){
-
+  handleCartClick(e, product) {
+    if (product.attributes.length === 0) {
+      this.props.addToCart({
+        ...product,
+        cartAmount: 1,
+        id: Math.floor(Math.random() * 100000),
+      });
+      this.props.navigate("/cart");
+      return 1;
     }
-    this.handleCardClick(product)
+
+    console.log("tt123");
+    this.handleCardClick(e, product, true);
   }
   render() {
     let name = this.props.match.param.id;
@@ -48,7 +60,8 @@ class ProductListing extends Component {
                         key={i}
                         price={symbol.concat(" ", price.amount)}
                         inStock={v.inStock}
-                        handleCardClick={()=>this.handleCardClick(v)}
+                        handleCardClick={(e) => this.handleCardClick(e, v,true)}
+                        handleCartClick={(e) => this.handleCartClick(e, v)}
                       />
                     );
                   })}
@@ -66,8 +79,13 @@ const mapStateToProps = (state) => {
     currency: state.currency,
   };
 };
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (e) => dispatch(addToCart(e)),
+  };
+};
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(withParam(ProductListing));

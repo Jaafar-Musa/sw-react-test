@@ -5,6 +5,7 @@ import store from "./store";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql";
 
+
 function App() {
   return (
     <div>

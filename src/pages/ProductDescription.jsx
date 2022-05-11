@@ -14,7 +14,7 @@ class ProductDescription extends Component {
     product: {},
     updatedAttributes: [],
   };
-
+  //todo refactor
   handleChange(e, i, product) {
     const val = e.target.value;
     let array = [];
@@ -38,18 +38,18 @@ class ProductDescription extends Component {
   }
 
   attributesSelected() {
-    const prod = this.state.product
+    const prod = this.state.product;
     if (Object.keys(prod).length !== 0) {
       const attr = prod.attributes;
-      const isSelected = attr.filter((v) => v.hasOwnProperty('selected'));
+      const isSelected = attr.filter((v) => v.hasOwnProperty("selected"));
       return attr.length === isSelected.length;
     }
-    // return true
+    return false;
   }
 
   render() {
     let id = this.props.match.param.name;
-    let { currency ,addToCart} = this.props;
+    let { currency, addToCart } = this.props;
     return (
       <div className="ProductDescription">
         <Query query={GET_PRODUCT} variables={{ id }}>
@@ -68,7 +68,6 @@ class ProductDescription extends Component {
             const price = prices.filter(
               (v) => v.currency.label === currency.label
             );
-
             return (
               <>
                 <div className="ProductDescription__Gallery">
@@ -131,9 +130,38 @@ class ProductDescription extends Component {
                   <div className="button">
                     <button
                       disabled={
-                        !inStock || !this.attributesSelected(data.product)
+                        !inStock
+                          ? true
+                          : attributes.length === 0
+                          ? false
+                          : this.attributesSelected()
+                          ? false
+                          : true
                       }
-                      onClick={() => {console.log(this.state.product); addToCart(this.state.product)}}
+                      onClick={() => {
+                        if (Object.keys(this.state.product).length === 0) {
+                          this.props.addToCart({
+                            ...data.product,
+                            cartAmount: 1,
+                            id: Math.floor(Math.random() * 100000),
+                          });
+                          return this.props.navigate("/cart");
+                        }
+                        this.setState(
+                          {
+                            ...this.state,
+                            product: {
+                              ...this.state.product,
+                              cartAmount: 1,
+                              id: Math.floor(Math.random() * 100000),
+                            },
+                          },
+                          () => {
+                            addToCart(this.state.product);
+                            this.props.navigate("/cart");
+                          }
+                        );
+                      }}
                     >
                       Add to Cart
                     </button>
@@ -156,10 +184,13 @@ const mapStateToProps = (state) => {
     currency: state.currency,
   };
 };
-const mapDispatchToProps = (dispatch)=>{
-  return{
-    addToCart:(e)=>dispatch(addToCart(e))
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (e) => dispatch(addToCart(e)),
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(withParam(ProductDescription));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withParam(ProductDescription));

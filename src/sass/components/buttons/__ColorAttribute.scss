@@ -1,5 +1,20 @@
 $cube: 20px;
 .ColorAttribute {
+  &.min {
+    padding: 0;
+    margin: 0;
+    margin-top: 2px;
+    .ColorAttribute {
+      &__Selection {
+        width: 13px;
+        height: 13px;
+        margin: 2px 3px;
+      }
+    }
+    form{
+        margin-top: 1px;
+    }
+  }
   margin: 10px 0;
   width: fit-content;
   form {

@@ -1,0 +1,43 @@
+.Cart{
+    padding: 0px 40px;
+    padding-bottom: 30px;
+
+    &__Title{
+        height: calc(30vh - $height-Navbar);
+        @include flex(flex-start,center);
+        h1{
+            font-size: 30px;
+        }
+    }
+    &__NoItems{
+        @include flex(center,center);
+        height: calc(70vh - $height-Navbar);
+        color: gray;
+        font-size: 25px;
+    }
+    &__Details{
+        margin-top: 30px;
+        height: 150px;
+        @include flex(space-evenly,unset);
+        flex-direction: column;
+        span{
+            display: flex;
+            width: fit-content ;
+            font-weight: lighter;
+            p{
+                padding-left: 8px;
+                font-weight: bolder;
+            }
+        }
+        button{
+            background-color: $color-primary;
+            width: 300px;
+            margin-top: 30px;
+            padding: 12px;
+            color: white;
+            &:hover {
+                cursor: pointer;
+              }
+        }
+    }
+}

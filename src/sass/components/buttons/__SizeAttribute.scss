@@ -1,45 +1,61 @@
-.SizeAttribute{
-    margin: 10px 0;
-    width: fit-content;
-    form{
-        display: flex;
-        margin-top: 7px;
-        flex-wrap: wrap;
-    }
-    // position: relative;
-    &__Selection{
-        margin: 2px 4px;
-        min-width: 55px;
+.SizeAttribute {
+  margin: 10px 0;
+  width: fit-content;
+  &.min {
+    padding: 0;
+    margin: 0;
+    margin-top: 2px;
+
+    .SizeAttribute {
+      &__Selection {
+        margin: 2px 3px;
         position: relative;
-        padding: 10px;
-        @include flex(center, center);
-        
-        input[type="radio"]{
-            &:checked{
-                &::before{
-                    content: attr(data-size);
-                    position: absolute;
-                    @include flex(center,center);
-                    background-color: $color-black;
-                    color: rgb(255, 255, 255) ;
-                    width: 100%;
-                    height: 100%;
-                }
-                opacity: 1;
-            }
-            cursor: pointer;
-            display: inline-block;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-        }
-        &::before{
-            content: "";
-            border: 1px solid $color-black;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+        padding: 2px;
+        min-width: 10px;
+      }
     }
+    form {
+      margin-top: 1px;
+    }
+  }
+  form {
+    display: flex;
+    margin-top: 7px;
+    flex-wrap: wrap;
+  }
+  &__Selection {
+    margin: 2px 4px;
+    min-width: 55px;
+    position: relative;
+    padding: 10px;
+    @include flex(center, center);
+
+    input[type="radio"] {
+      &:checked {
+        &::before {
+          content: attr(data-size);
+          position: absolute;
+          @include flex(center, center);
+          background-color: $color-black;
+          color: rgb(255, 255, 255);
+          width: 100%;
+          height: 100%;
+        }
+        opacity: 1;
+      }
+      cursor: pointer;
+      display: inline-block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+    &::before {
+      content: "";
+      border: 1px solid $color-black;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }

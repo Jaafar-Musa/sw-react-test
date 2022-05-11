@@ -13,6 +13,10 @@ class DropdownBtn extends Component {
     };
   }
 
+  componentWillUnmount(){
+    this.setState({dropdownOpen:false})
+  }
+
   HandleClick = ()=>{
     if(this.props.backdrop){
       this.props.toggleBackdrop()

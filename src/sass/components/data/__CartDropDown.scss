@@ -1,7 +1,34 @@
 .CartDropDown{
-    min-width: 280px;
+    min-width: 350px;
     position: relative;
     background-color: rgb(255, 255, 255);
     z-index: $zIndex-overBackdrop;
-    padding: 10px 5px;
+    padding: 10px;
+    &__Bag{
+
+        @include flex(flex-start,center);
+        margin-bottom: 8px;
+    }
+    &__Buttons{
+        margin-top: 18px;
+        display: flex;
+        button{
+            @include flex(center,center);
+            font-size: 12px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            margin: 1px 3px;
+            &:nth-child(1){
+                border: 1px solid $color-black;
+            }
+            &:nth-child(2){
+                color: white;
+                background-color: $color-primary;
+            }
+        }
+    }
+    &__Price{
+        margin-top: 18px;
+        @include flex(space-between, center);
+    }
 }

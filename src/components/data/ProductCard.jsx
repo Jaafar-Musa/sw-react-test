@@ -10,13 +10,13 @@ class ProductCard extends Component {
     onHover: false,
   };
   render() {
-    const { inStock, brand, price, imgUrl ,handleCardClick} = this.props;
+    const { inStock, brand, price, imgUrl ,handleCardClick, handleCartClick} = this.props;
     return (
       <div
         className="ProductCard"
         onMouseEnter={() => this.setState({ onHover: true })}
         onMouseLeave={() => this.setState({ onHover: false })}
-        onClick={handleCardClick}
+        onClick={(e)=>handleCardClick(e)}
       >
         {!inStock && <div className="ProductCard__OOS">OUT OF STOCK</div>}
         <div className="ProductCard__Image">
@@ -28,6 +28,7 @@ class ProductCard extends Component {
             style={{
               display: this.state.onHover && inStock ? "flex" : "none",
             }}
+            onClickCapture={(e)=>handleCartClick(e)}
           >
             <EmptyCart />
           </div>

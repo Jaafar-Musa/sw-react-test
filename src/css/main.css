@@ -80,6 +80,7 @@ nav li {
   padding: 12px;
   background-color: transparent;
   position: relative;
+  z-index: 1;
 }
 .ProductCard:hover {
   box-shadow: 0px 4px 35px 0px rgba(168, 172, 176, 0.447);
@@ -127,6 +128,7 @@ nav li {
   align-items: center;
   transition: all linear 0.1s;
   position: absolute;
+  z-index: 2;
   background-color: #5ece7b;
   width: 45px;
   height: 45px;
@@ -154,7 +156,8 @@ nav li {
   width: 100%;
   padding: 20px 0;
   border-bottom: 1px solid #e5e5e5;
-  min-height: 250px;
+  height: 300px;
+  height: fit-content;
 }
 .CartItems:nth-child(1) {
   border-top: 1px solid #e5e5e5;
@@ -163,23 +166,23 @@ nav li {
   display: flex;
   flex: 0.8;
 }
-.CartItems__InfoOptions {
+.CartItems__Info .Details {
   flex: 0.9;
 }
-.CartItems__InfoOptions h3 {
+.CartItems__Info .Details h3 {
   font-size: 25px;
   font-weight: bold;
 }
-.CartItems__InfoOptions h4 {
+.CartItems__Info .Details h4 {
   font-weight: lighter;
   font-size: 18px;
   margin: 5px 0;
 }
-.CartItems__InfoOptions p {
+.CartItems__Info .Details p {
   margin: 10px 0;
   font-weight: bold;
 }
-.CartItems__InfoAmount {
+.CartItems__Info .Amount {
   height: 100%;
   flex: 0.1;
   display: flex;
@@ -187,9 +190,92 @@ nav li {
   align-items: center;
   flex-direction: column;
 }
+.CartItems__Info .Amount button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  padding: 4px 15px;
+  font-size: 35px;
+  font-weight: lighter;
+}
+.CartItems__Info .Amount button:hover {
+  background-color: #1d1f22;
+  color: white;
+  cursor: pointer;
+}
+.CartItems__Info .Attributes {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  padding-right: 10px;
+}
 .CartItems__Imgs {
   flex: 0.2;
-  background-color: #dfdede;
+  height: 100%;
+}
+.CartItems__Imgs img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.CartItems.min {
+  border: none;
+  height: fit-content;
+  margin-top: 1px;
+}
+.CartItems.min .CartItems__Info {
+  flex: 0.6;
+}
+.CartItems.min .CartItems__Info .Attributes {
+  padding: 0;
+}
+.CartItems.min .CartItems__Info .Details {
+  flex: 0.85;
+}
+.CartItems.min .CartItems__Info .Details h3 {
+  font-size: 15px;
+  font-weight: bold;
+}
+.CartItems.min .CartItems__Info .Details h4 {
+  font-weight: lighter;
+  font-size: 10px;
+  margin: 5px 0;
+}
+.CartItems.min .CartItems__Info .Details p {
+  margin: 3px 0;
+  font-weight: bold;
+  font-size: 12px;
+}
+.CartItems.min .CartItems__Info .Amount {
+  flex: 0.15;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.CartItems.min .CartItems__Info .Amount button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  padding: 4px 1px;
+  font-size: 25px;
+  font-weight: lighter;
+  height: 30px;
+}
+.CartItems.min .CartItems__Info .Amount button:hover {
+  background-color: #1d1f22;
+  color: white;
+  cursor: pointer;
+}
+.CartItems.min .CartItems__Imgs {
+  flex: 0.4;
+  width: 100%;
+  height: auto;
+  padding: 0 2px;
 }
 
 .CurrencyDropDown {
@@ -200,11 +286,43 @@ nav li {
 }
 
 .CartDropDown {
-  min-width: 280px;
+  min-width: 350px;
   position: relative;
   background-color: white;
   z-index: 5;
-  padding: 10px 5px;
+  padding: 10px;
+}
+.CartDropDown__Bag {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.CartDropDown__Buttons {
+  margin-top: 18px;
+  display: flex;
+}
+.CartDropDown__Buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 1px 3px;
+}
+.CartDropDown__Buttons button:nth-child(1) {
+  border: 1px solid #1d1f22;
+}
+.CartDropDown__Buttons button:nth-child(2) {
+  color: white;
+  background-color: #5ece7b;
+}
+.CartDropDown__Price {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Loading {
@@ -235,29 +353,28 @@ nav li {
   width: 100%;
   height: 100%;
   background-color: red;
-  position: absolute;
+  position: fixed;
   z-index: 4;
   background-color: rgba(57, 55, 72, 0.22);
-}
-
-.CartItemsToggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid;
-  padding: 4px 15px;
-  font-size: 35px;
-  font-weight: lighter;
-}
-.CartItemsToggle:hover {
-  background-color: #1d1f22;
-  color: white;
-  cursor: pointer;
 }
 
 .SizeAttribute {
   margin: 10px 0;
   width: fit-content;
+}
+.SizeAttribute.min {
+  padding: 0;
+  margin: 0;
+  margin-top: 2px;
+}
+.SizeAttribute.min .SizeAttribute__Selection {
+  margin: 2px 3px;
+  position: relative;
+  padding: 2px;
+  min-width: 10px;
+}
+.SizeAttribute.min form {
+  margin-top: 1px;
 }
 .SizeAttribute form {
   display: flex;
@@ -306,6 +423,19 @@ nav li {
 .ColorAttribute {
   margin: 10px 0;
   width: fit-content;
+}
+.ColorAttribute.min {
+  padding: 0;
+  margin: 0;
+  margin-top: 2px;
+}
+.ColorAttribute.min .ColorAttribute__Selection {
+  width: 13px;
+  height: 13px;
+  margin: 2px 3px;
+}
+.ColorAttribute.min form {
+  margin-top: 1px;
 }
 .ColorAttribute form {
   display: flex;
@@ -503,6 +633,55 @@ nav li {
 .ProductDescription__Info > .description {
   flex: 0.3;
   padding-top: 30px;
+}
+
+.Cart {
+  padding: 0px 40px;
+  padding-bottom: 30px;
+}
+.Cart__Title {
+  height: calc(30vh - 60px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.Cart__Title h1 {
+  font-size: 30px;
+}
+.Cart__NoItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(70vh - 60px);
+  color: gray;
+  font-size: 25px;
+}
+.Cart__Details {
+  margin-top: 30px;
+  height: 150px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: unset;
+  flex-direction: column;
+}
+.Cart__Details span {
+  display: flex;
+  width: fit-content;
+  font-weight: lighter;
+}
+.Cart__Details span p {
+  padding-left: 8px;
+  font-weight: bolder;
+}
+.Cart__Details button {
+  background-color: #5ece7b;
+  width: 300px;
+  margin-top: 30px;
+  padding: 12px;
+  color: white;
+}
+.Cart__Details button:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */
