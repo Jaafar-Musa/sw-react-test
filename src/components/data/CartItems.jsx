@@ -35,6 +35,19 @@ class CartItems extends Component {
     this.props.reduceCart(id);
   }
 
+  HandleImages(e, img) {
+    let current = this.state.mainImg;
+    let i = img.length - 1;
+    let name = e.target.name;
+
+    if (name === "increase") {
+      if (current === i) return this.setState({ ...this.state, mainImg: 0 });
+      return this.setState({ ...this.state, mainImg: current + 1 });
+    }
+    if (current === 0) return this.setState({ ...this.state, mainImg: i });
+    return this.setState({ ...this.state, mainImg: current - 1 });
+  }
+
   render() {
     const { name, brand, price, attributes, cartAmount, id, gallery, min } =
       this.props;
@@ -95,7 +108,22 @@ class CartItems extends Component {
         </div>
         <div className="CartItems__Imgs">
           <img src={gallery[this.state.mainImg]} alt="" />
-          
+          <div className="ImageToggle">
+            <button
+              name="decrease"
+              onClick={(e) => this.HandleImages(e, gallery)}
+              disabled={gallery.length === 1}
+            >
+              {"<"}
+            </button>
+            <button
+              name="increase"
+              onClick={(e) => this.HandleImages(e, gallery)}
+              disabled={gallery.length === 1}
+            >
+              {">"}
+            </button>
+          </div>
         </div>
       </section>
     );

@@ -58,10 +58,34 @@
   &__Imgs {
     flex: 0.2;
     height: 100%;
+    position: relative;
     img {
       width: 100%;
       height: 100%;
       display: block;
+    }
+    .ImageToggle{
+      position: absolute;
+      bottom: 10px;
+      width: 50%;
+      height: 30px;
+      right: 0;
+      @include flex(space-evenly,center);
+      button{
+        background-color: rgba(0, 0, 0, 0.73);
+        width: 30px;
+        height: 30px;
+        @include flex(flex-start,center);
+        flex-direction: column;
+        color: white;
+        font-size: 22px;
+        &:hover{
+          cursor: pointer;
+        }
+        &:disabled{
+          cursor: not-allowed;
+        }
+      }
     }
   }
 
@@ -71,6 +95,7 @@
     height: fit-content;
     margin-top: 1px;
     .CartItems {
+
       &__Info {
         .Attributes {
           padding: 0;
@@ -118,6 +143,9 @@
         width: 100%;
         height: auto;
         padding: 0 2px;
+        .ImageToggle{
+          display: none;
+        }
       }
     }
   }
