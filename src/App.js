@@ -4,18 +4,19 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql";
+import React, { Component } from 'react'
 
 
-function App() {
-  return (
-    <div>
+export default class App extends Component {
+  render() {
+    return (
+      <div>
       <Provider store={store}>
         <ApolloProvider client={client}>
           <Routing />
         </ApolloProvider>
       </Provider>
     </div>
-  );
+    )
+  }
 }
-
-export default App;
