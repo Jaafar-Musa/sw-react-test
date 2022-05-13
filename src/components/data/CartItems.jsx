@@ -68,9 +68,10 @@ class CartItems extends Component {
                         name={attribute.id}
                         key={i}
                         selected={attribute.selected}
-                        onChange={(e) =>
-                          this.handleAttributeChange(e, attributes, id)
-                        }
+                        // onChange={(e) =>
+                        //   this.handleAttributeChange(e, attributes, id)
+                        // }
+                        disabled
                         min={min}
                       />
                     );
@@ -89,9 +90,9 @@ class CartItems extends Component {
                         name={attribute.name}
                         key={i}
                         selected={attribute.selected}
-                        onChange={(e) =>
-                          this.handleAttributeChange(e, attributes, id)
-                        }
+                        // onChange={(e) =>
+                        //   this.handleAttributeChange(e, attributes, id)
+                        // }
                       />
                     );
                     return null
@@ -137,7 +138,7 @@ CartItems.propTypes = {
   brand: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   cartAmount: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   min: PropTypes.bool,
   gallery: PropTypes.array.isRequired,
 };

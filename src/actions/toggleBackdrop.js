@@ -1,7 +1,8 @@
 import { ActionTypes } from "."
 
-export const toggleBackdrop = ()=>{
+export const toggleBackdrop = (bool)=>{
     return{
-        type:ActionTypes.TOGGLE_BACKDROP
+        type:ActionTypes.TOGGLE_BACKDROP,
+        payload:bool
     }
 }

@@ -16,7 +16,7 @@ export default class Routing extends Component {
         <Routes>
           <Route path="/" element={<Layout />}>
 
-              <Route path="/" element={<Navigate to={"/categories/explore"}/>}/>
+              <Route path="/" element={<Navigate to={"/categories/all"}/>}/>
               <Route path="/categories/:id" element={<ProductListing/>}/>
               <Route path="/categories/:id/:name" element={<ProductDescription/>}/>
               <Route path="/cart" element={<Cart/>}/>

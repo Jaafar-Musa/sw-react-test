@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Dropdown from "../navigation/Dropdown";
 import UpDownArrows from "../svg/UpDownArrows";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { toggleBackdrop } from "../../actions";
 import { connect } from "react-redux";
 
@@ -13,31 +13,34 @@ class DropdownBtn extends Component {
     };
   }
 
-  componentWillUnmount(){
-    this.setState({dropdownOpen:false})
+  componentWillUnmount() {
+    this.setState({ dropdownOpen: false });
   }
 
-  HandleClick = ()=>{
-    if(this.props.backdrop){
-      this.props.toggleBackdrop()
+  HandleClick = () => {
+    if (this.props.backdrop) {
+      this.props.toggleBackdrop(true);
     }
     this.setState((prevState) => ({
       ...prevState,
       dropdownOpen: !prevState.dropdownOpen,
     }));
-  }
+  };
+  HandleClose = () => {
+    this.setState({ ...this.state, dropdownOpen: false },()=>this.props.toggleBackdrop(false));
 
+  };
   render() {
+    const { countIcon, dropdown, value, dropdownContent } = this.props;
     return (
       <div className="DropdownBtn">
-        <button
-          onClick={this.HandleClick}
-        >
-          {this.props.value} {this.props.dropdown ? <UpDownArrows /> : null}
+        {countIcon > 0 && <div className="DropdownBtn__Counter"><p>{countIcon}</p></div>}
+        <button onClick={this.HandleClick}>
+          {value} {dropdown ? <UpDownArrows /> : null}
         </button>
-        {this.props.dropdownContent && (
+        {dropdownContent && (
           <Dropdown open={this.state.dropdownOpen}>
-            {this.props.dropdownContent}
+            {React.cloneElement(dropdownContent, { close: this.HandleClose })}
           </Dropdown>
         )}
       </div>
@@ -45,18 +48,17 @@ class DropdownBtn extends Component {
   }
 }
 
-
-const mapDispatchToProps = (dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
   return {
-    toggleBackdrop:()=>dispatch(toggleBackdrop())
-  }
-}
+    toggleBackdrop: (e) => dispatch(toggleBackdrop(e)),
+  };
+};
 
 DropdownBtn.propTypes = {
-  dropdown:PropTypes.bool,
-  value: PropTypes.oneOfType([PropTypes.string,PropTypes.element]),
-  backdrop:PropTypes.bool,
-}
+  dropdown: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  backdrop: PropTypes.bool,
+  countIcon: PropTypes.number,
+};
 
-
-export default connect(null,mapDispatchToProps)(DropdownBtn)
+export default connect(null, mapDispatchToProps)(DropdownBtn);

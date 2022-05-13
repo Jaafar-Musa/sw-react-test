@@ -18,9 +18,7 @@ class Navbar extends Component {
           {networkStatus === 7 ? (
             categories.map((val, i) => {
               let { name } = val;
-              return name === "all" ? (
-                <NavLink to={`/categories/explore`} text={"Explore"} key={i} />
-              ) : (
+              return (
                 <NavLink
                   to={`/categories/${name}`}
                   text={name.charAt(0).toUpperCase() + name.slice(1)}
@@ -29,7 +27,7 @@ class Navbar extends Component {
               );
             })
           ) : (
-            <NavLink to={`/categories/explore`} text={"Explore"} />
+            <NavLink to={`/categories/all`} text={"All"} />
           )}
         </ul>
         <span>
@@ -42,15 +40,14 @@ class Navbar extends Component {
             dropdown
             dropdownContent={
               <CurrencyDropDown
-                currencies={
-                  currencies === undefined
-                    ? [this.props.currency]
-                    : currencies
-                }
+              currencies={
+                currencies === undefined ? [this.props.currency] : currencies
+              }
               />
             }
-          />
+            />
           <DropdownBtn
+            countIcon={this.props.cart.length}
             value={<EmptyCart />}
             dropdownContent={<CartDropDown />}
             backdrop
@@ -59,13 +56,12 @@ class Navbar extends Component {
       </nav>
     );
   }
-
 }
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
   return {
-    currency:state.currency
-  }
-
-}
+    currency: state.currency,
+    cart:state.cart,
+  };
+};
 
 export default connect(mapStateToProps)(graphql(NAV_DATA)(Navbar));

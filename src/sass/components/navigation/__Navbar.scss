@@ -19,6 +19,7 @@ nav {
     }
     &__Active {
       border-bottom: 2px solid $color-primary;
+      color: $color-primary !important;
     }
   }
   li {

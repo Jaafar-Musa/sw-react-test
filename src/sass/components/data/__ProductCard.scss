@@ -30,7 +30,7 @@
         position: relative;
         @include flex(center,center);
         img{
-            width: 100%;
+            width: auto;
             height: 100%;
             display: block;
             // object-fit: cover;
@@ -42,7 +42,7 @@
         flex-direction:column;
         position: relative;  
         &__Cart{
-            @include flex(center,center);
+            display: none;
             transition: all linear 0.1s;
             position: absolute;
             z-index: $zIndex-Elevate;

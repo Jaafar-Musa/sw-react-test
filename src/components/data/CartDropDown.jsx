@@ -4,9 +4,13 @@ import withParam from "../../utils/useParams";
 import CartItems from "./CartItems";
 
 class CartDropDown extends Component {
-  state = {
-    totalPrice: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.dropdownRef = React.createRef();
+    this.state = {
+      totalPrice: 0,
+    };
+  }
 
   TotalPrice() {
     if (this.props.cart.length !== 0) {
@@ -21,9 +25,10 @@ class CartDropDown extends Component {
       });
       return this.setState({ ...this.state, totalPrice: total });
     }
-    this.setState({ ...this.state, totalPrice: 0 })
+    this.setState({ ...this.state, totalPrice: 0 });
   }
   componentDidMount() {
+    this.dropdownRef.current.focus();
     this.TotalPrice();
   }
   componentDidUpdate(prevProps) {
@@ -31,22 +36,40 @@ class CartDropDown extends Component {
       prevProps.cart !== this.props.cart ||
       prevProps.currency !== this.props.currency
     ) {
+      this.dropdownRef.current.focus();
       this.TotalPrice();
     }
   }
 
+  handleClose(){
+    this.props.close();
+  }
+  handleBlur(e) {
+    const current = e.currentTarget;
+    requestAnimationFrame(() => {
+      if (!current.contains(document.activeElement)) {
+        this.handleClose()
+      }
+    });
+  }
   render() {
     const { cart, navigate, currency } = this.props;
     return (
-      <div className="CartDropDown">
+      <div
+        className="CartDropDown"
+        onBlur={(e) => {
+          this.handleBlur(e);
+        }}
+        tabIndex={-1}
+        ref={this.dropdownRef}
+      >
         <div className="CartDropDown__Bag">
           <p>
             My Bag: <span>{cart.length} items</span>
           </p>
         </div>
         <div className="CartDropDown__Items">
-          {cart.slice(cart.length - 2).map((v, i) => {
-
+          {cart.map((v, i) => {
             let [prices] = v.prices.filter(
               (v) => v.currency.label === currency.label
             );
@@ -74,6 +97,7 @@ class CartDropDown extends Component {
           <button
             onClick={() => {
               navigate("/cart");
+              this.handleClose();
             }}
           >
             VIEW BAG
@@ -92,4 +116,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(withParam(CartDropDown));
+
+export default connect(
+  mapStateToProps,
+)(withParam(CartDropDown));

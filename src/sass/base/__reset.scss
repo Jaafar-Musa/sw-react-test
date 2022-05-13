@@ -3,9 +3,21 @@
     padding: 0;
     box-sizing: border-box;
     // border: solid;
+    &:focus{
+        outline: none;
+    }
 }
 button{
     background-color: transparent;
     border: none;
+    &:focus{
+        outline: none;
+    }
+}
+input[type="radio"]:disabled{
 
+        &:hover{
+            cursor: not-allowed;
+        }
+    background-color: red;
 }

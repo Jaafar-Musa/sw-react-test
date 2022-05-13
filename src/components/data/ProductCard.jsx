@@ -7,29 +7,36 @@ class ProductCard extends Component {
     onHover: false,
   };
   render() {
-    const { inStock, brand, price, imgUrl ,handleCardClick, handleCartClick} = this.props;
+    const {
+      inStock,
+      brand,
+      price,
+      imgUrl,
+      handleCardClick,
+      handleCartClick,
+      name,
+    } = this.props;
     return (
       <div
         className="ProductCard"
         onMouseEnter={() => this.setState({ onHover: true })}
         onMouseLeave={() => this.setState({ onHover: false })}
-        onClick={(e)=>handleCardClick(e)}
+        onClick={() => handleCardClick()}
       >
         {!inStock && <div className="ProductCard__OOS">OUT OF STOCK</div>}
         <div className="ProductCard__Image">
-          <img src={imgUrl} alt={brand}/>
+          <img src={imgUrl} alt={brand} />
         </div>
         <div className="ProductCard__Desc">
           <div
-            className="ProductCard__Desc__Cart"
-            style={{
-              display: this.state.onHover && inStock ? "flex" : "none",
-            }}
-            onClickCapture={(e)=>handleCartClick(e)}
+            className={`ProductCard__Desc__Cart ${
+              this.state.onHover && inStock ? "Flex" : undefined
+            }`}
+            onClick={(e) => handleCartClick(e)}
           >
             <EmptyCart />
           </div>
-          <span>{brand}</span>
+          <span>{brand.concat(" ", name)}</span>
           <p>{price}</p>
         </div>
       </div>
@@ -39,10 +46,11 @@ class ProductCard extends Component {
 ProductCard.propTypes = {
   imgUrl: PropTypes.string.isRequired,
   brand: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   inStock: PropTypes.bool.isRequired,
-  handleCardClick:PropTypes.func,
-  handleCartClick:PropTypes.func,
+  handleCardClick: PropTypes.func,
+  handleCartClick: PropTypes.func,
 };
 
 export default ProductCard;

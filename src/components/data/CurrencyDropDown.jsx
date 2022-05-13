@@ -5,15 +5,28 @@ import { connect } from "react-redux";
 import { setCurrency } from "../../actions";
 
 class CurrencyDropDown extends Component {
+  constructor(props) {
+    super(props);
+    this.dropdownRef = React.createRef();
+  }
   HandleClick(val) {
     this.props.setCurrency(val);
   }
 
+  componentDidMount() {
+    this.dropdownRef.current.focus();
+  }
+
   render() {
     const { currency } = this.props;
-    const currencies = this.props.currencies;
+    const { currencies, close } = this.props;
     return (
-      <div className="CurrencyDropDown">
+      <div
+        className="CurrencyDropDown"
+        onBlur={() => close()}
+        tabIndex={1}
+        ref={this.dropdownRef}
+      >
         {currencies.map((val, i) => {
           const cur = val.symbol.concat(" ", val.label);
           return (
@@ -23,6 +36,7 @@ class CurrencyDropDown extends Component {
               active={currency.label === val.label}
               handleClick={() => {
                 this.HandleClick(val);
+                close()
               }}
             />
           );
@@ -33,6 +47,7 @@ class CurrencyDropDown extends Component {
 }
 CurrencyDropDown.propTypes = {
   currencies: PropTypes.array.isRequired,
+  close: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {

@@ -9,7 +9,6 @@ class NavLink extends Component {
       <Link
         to={this.props.to}
         className={({ isActive }) => (isActive ? "Links__Active" : undefined)}
-        style={({ isActive }) => (isActive ? {color:"#5ECE7B"} : undefined)}
       >
         {this.props.text}
       </Link>

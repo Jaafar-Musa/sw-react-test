@@ -1,9 +1,10 @@
 import { ActionTypes } from "../actions";
 
+
 export const cartReducer = (state = [], action) => {
   switch (action.type) {
     case ActionTypes.ADD_TO_CART:
-      return [...state, action.payload];
+      return [...state,{ ...action.payload, cartAmount:1}];
 
     case ActionTypes.REMOVE_FROM_CART:
       return state.filter((v) => v.id !== action.payload);

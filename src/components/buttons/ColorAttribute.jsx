@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class ColorAttribute extends Component {
   render() {
-    const { attributes, name, onChange, selected, min } = this.props;
+    const { attributes, name, onChange, selected, min , disabled} = this.props;
     return (
       <div className={`ColorAttribute ${min ? "min" : null}`}>
         <h4>{name && name + ":"} </h4>
@@ -21,6 +21,7 @@ class ColorAttribute extends Component {
                   key={i}
                 >
                   <input
+                    disabled={disabled}
                     type="radio"
                     name={name}
                     value={v.value}
@@ -39,6 +40,7 @@ ColorAttribute.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   min: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default ColorAttribute;

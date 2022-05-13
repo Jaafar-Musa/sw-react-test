@@ -6,7 +6,9 @@ import { Query } from "@apollo/client/react/components";
 import Loading from "../components/data/Loading";
 import withParam from "../utils/useParams";
 import { GET_PRODUCT } from "../graphql/productQuery";
-import { addToCart } from "../actions";
+import { addToCart, increaseCartAmount } from "../actions";
+import { getId, inCart, selectFirstAttri } from "../utils/cart";
+import parse from "html-react-parser";
 
 class ProductDescription extends Component {
   state = {
@@ -29,7 +31,6 @@ class ProductDescription extends Component {
       });
       array = updatedAtt;
     }
-
     this.setState({
       ...this.state,
       product: { ...product, attributes: array },
@@ -49,7 +50,8 @@ class ProductDescription extends Component {
 
   render() {
     let id = this.props.match.param.name;
-    let { currency, addToCart } = this.props;
+    let { currency, addToCart, cart, increaseCartAmount } = this.props;
+    console.log(id)
     return (
       <div className="ProductDescription">
         <Query query={GET_PRODUCT} variables={{ id }}>
@@ -140,37 +142,25 @@ class ProductDescription extends Component {
                           : true
                       }
                       onClick={() => {
-                        if (Object.keys(this.state.product).length === 0) {
-                          this.props.addToCart({
-                            ...data.product,
-                            cartAmount: 1,
-                            id: Math.floor(Math.random() * 100000),
-                          });
-                          return this.props.navigate("/cart");
+                        let product = this.state.product;
+
+                        if (Object.keys(product).length === 0) {
+                          product = data.product;
+                          let updatedProd = selectFirstAttri(product);
+                          let id = getId(product);
+                          if (inCart(cart, id)) return increaseCartAmount(id);
+
+                          return addToCart({ ...updatedProd, id });
                         }
-                        this.setState(
-                          {
-                            ...this.state,
-                            product: {
-                              ...this.state.product,
-                              cartAmount: 1,
-                              id: Math.floor(Math.random() * 100000),
-                            },
-                          },
-                          () => {
-                            addToCart(this.state.product);
-                            this.props.navigate("/cart");
-                          }
-                        );
+                        let id = getId(product);
+                        if (inCart(cart, id)) return increaseCartAmount(id);
+                        return addToCart({ ...product, id });
                       }}
                     >
                       Add to Cart
                     </button>
                   </div>
-                  <div
-                    className="description"
-                    dangerouslySetInnerHTML={{ __html: description }}
-                  ></div>
+                  <div className="description">{parse(description)}</div>
                 </div>
               </>
             );
@@ -183,11 +173,13 @@ class ProductDescription extends Component {
 const mapStateToProps = (state) => {
   return {
     currency: state.currency,
+    cart: state.cart,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (e) => dispatch(addToCart(e)),
+    increaseCartAmount: (e) => dispatch(increaseCartAmount(e)),
   };
 };
 

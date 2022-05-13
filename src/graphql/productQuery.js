@@ -13,6 +13,7 @@ query($id:String!){
             type,
             id
         },
+        id,
         brand,
         category,
         description,
